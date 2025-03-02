@@ -10,4 +10,4 @@
   - Create a venv using this command python -m venv .venv
   - Activate venv using this command source .venv/Scripts/activate
   - Run this command to install deps pip install -r requirements.txt
-  - Now you can execute the code
+  - Now you can execute the code by this command ``` python manage.py runserver ```  
