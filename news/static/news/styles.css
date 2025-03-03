@@ -1,60 +1,94 @@
 /* General Styles */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f8f9fa;
+    font-family: 'Arial', sans-serif;
+    background-color: #0e0d0d;
     margin: 0;
-    padding: 20px;
+    padding: 0;
+    /* color: #333; */
 }
 
 /* Container */
 .container {
-    max-width: 800px;
-    margin: auto;
-    background: white;
+    width: 90%;
+    max-width: 1000px;
+    margin: 20px auto;
+    background: #fff;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 /* Header */
 h1 {
     text-align: center;
+    color: #007bff;
+    margin-bottom: 20px;
+}
+
+/* News Item */
+.news-item {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 20px;
+}
+
+.news-item h2 {
+    font-size: 22px;
     color: #333;
 }
 
-/* News List */
-ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-li {
-    background: #ffffff;
-    padding: 15px;
-    margin: 10px 0;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease-in-out;
-}
-
-li:hover {
-    transform: scale(1.02);
-}
-
-/* News Title */
-h3 {
-    margin: 0;
-    font-size: 1.2em;
-    color: #007bff;
-}
-
-/* Description */
-p {
+.news-item p {
+    font-size: 16px;
     color: #555;
-    margin: 5px 0;
+}
+
+/* News Meta (Date & Type) */
+.news-meta {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 10px;
 }
 
 /* Author */
-strong {
-    color: #333;
+.news-item strong {
+    color: #007bff;
+}
+
+/* News Image */
+.news-item img {
+    width: 100%;
+    max-width: 600px;
+    border-radius: 6px;
+    margin-top: 10px;
+    display: block;
+}
+
+/* Remove last item border */
+.news-item:last-child {
+    border-bottom: 1px solid black;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+        padding: 15px;
+    }
+
+    .news-item h2 {
+        font-size: 20px;
+    }
+
+    .news-item p {
+        font-size: 14px;
+    }
+
+    .news-meta {
+        font-size: 13px;
+    }
+
+    .news-item img {
+        width: 100%;
+        max-width: 100%;
+    }
 }
