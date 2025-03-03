@@ -10,23 +10,33 @@
 </head>
 
 <body>
-    <div class="container">
-        <h1>Latest News</h1>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
         <ul>
-            {% for article in news %}
-            <li>
-                <h3>{{ article.title }}</h3>
-                <p>{{ article.description }}</p>
-                <p><strong>Author:</strong> {{ article.author }}</p>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'category_news' category='international' %}">International</a></li>
+            <li><a href="{% url 'category_news' category='sports' %}">Sports</a></li>
+            <li><a href="{% url 'category_news' category='entertainment' %}">Entertainment</a></li>
+            <li><a href="{% url 'category_news' category='business' %}">Business</a></li>
+        </ul>
+    </nav>
 
-                {% if item.image_url %}
-                <img src="{{ item.image_url }}" alt="News Image" width="300">
-                {% else %}
-                <p>No Image Available</p>
+    <div class="container">
+        <h1>{{ category|title }} News</h1>
+        <ul>
+            {% for item in news %}
+            <div class="news-item">
+                <h2>{{ item.title }}</h2>
+                <p class="news-meta">
+                    <span><strong>Type:</strong> {{ item.news_type }}</span> |
+                    <span><strong>Published:</strong> {{ item.published_date }}</span>
+                </p>
+                <p>{{ item.description }}</p>
+                <p><strong>Author:</strong> {{ item.author }}</p>
+                {% if item.image %}
+                    <img src="{{ item.image }}" alt="{{ item.title }}">
                 {% endif %}
-            </li>
-            {% empty %}
-            <p>No news available.</p>
+            </div>
             {% endfor %}
         </ul>
     </div>
