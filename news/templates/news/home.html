@@ -1,26 +1,35 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QuickHeadlines</title>
     <link rel="stylesheet" href="{% static 'news/styles.css' %}">
 </head>
+
 <body>
     <div class="container">
-        <h1>Latest Cricket News</h1>
+        <h1>Latest News</h1>
         <ul>
             {% for article in news %}
-                <li>
-                    <h3>{{ article.title }}</h3>
-                    <p>{{ article.description }}</p>
-                    <p><strong>Author:</strong> {{ article.author }}</p>
-                </li>
+            <li>
+                <h3>{{ article.title }}</h3>
+                <p>{{ article.description }}</p>
+                <p><strong>Author:</strong> {{ article.author }}</p>
+
+                {% if item.image_url %}
+                <img src="{{ item.image_url }}" alt="News Image" width="300">
+                {% else %}
+                <p>No Image Available</p>
+                {% endif %}
+            </li>
             {% empty %}
-                <p>No news available.</p>
+            <p>No news available.</p>
             {% endfor %}
         </ul>
     </div>
 </body>
+
 </html>
