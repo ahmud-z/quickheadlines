@@ -31,11 +31,11 @@
                     <span><strong>Type:</strong> {{ item.news_type }}</span> |
                     <span><strong>Published:</strong> {{ item.published_date }}</span>
                 </p>
-                <p>{{ item.description }}</p>
-                <p><strong>Author:</strong> {{ item.author }}</p>
                 {% if item.image %}
-                    <img src="{{ item.image }}" alt="{{ item.title }}">
+                <img src="{{ item.image }}" alt="{{ item.title }}">
                 {% endif %}
+                <p class="description">{{ item.description }}</p>
+                <p><strong>Author:</strong> {{ item.author }}</p>
             </div>
             {% endfor %}
         </ul>
