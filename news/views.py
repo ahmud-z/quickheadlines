@@ -1,10 +1,14 @@
 import requests
 from django.shortcuts import render
+from datetime import datetime
 
 IMAGE_BASE_URL = "https://images.prothomalo.com/"  # Base URL for images
-BASE_API_URL = "https://en.prothomalo.com/api/v1/collections/{category}?offset=0&limit=200"
+BASE_API_URL = (
+    "https://en.prothomalo.com/api/v1/collections/{category}?offset=0&limit=200"
+)
 
-DEFAULT_CATEGORY = "international"
+DEFAULT_CATEGORY = "bangladesh"
+
 
 def fetch_news(request, category=DEFAULT_CATEGORY):
     api_url = BASE_API_URL.format(category=category)
@@ -21,21 +25,34 @@ def fetch_news(request, category=DEFAULT_CATEGORY):
             description = story.get("seo", {}).get("meta-description")
             author = story.get("author-name")
             image_key = story.get("hero-image-s3-key")
-            published_date = story.get("published-time")
-            news_type = story.get("subheadline")
+            published_timestamp = story.get("published-at")  # Timestamp
+            category_name = category.replace("-", " ").title()  # Category
+
+            # Convert timestamp to readable datetime format
+            if published_timestamp:
+                published_date = datetime.utcfromtimestamp(
+                    int(published_timestamp) / 1000
+                ).strftime(
+                    "%B %d, %Y, %I:%M:%S %p"
+                )  # Example: "March 4, 2025, 02:24:40 AM UTC"
+            else:
+                published_date = "Unknown"
+
+            # Construct image URL
+            image_url = IMAGE_BASE_URL + image_key if image_key else None
 
             # Only add news if title, description, and author exist
             if title and description and author:
-                image_url = IMAGE_BASE_URL + image_key if image_key else None
-
-                news_list.append({
-                    "title": title,
-                    "description": description,
-                    "author": author,
-                    "image": image_url,
-                    "published_date": published_date if published_date else "Unknown",
-                    "news_type": news_type if news_type else "General News",
-                })
+                news_list.append(
+                    {
+                        "title": title,
+                        "description": description,
+                        "author": author,
+                        "image": image_url,
+                        "published_date": published_date,  # Converted Date-Time
+                        "category": category_name if category_name else "General News",
+                    }
+                )
 
     else:
         news_list = []

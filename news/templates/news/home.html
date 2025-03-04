@@ -12,12 +12,21 @@
 <body>
     <!-- Navigation Bar -->
     <nav class="navbar">
+        <h1 class="site-name">
+            <span style="color: #D4E7FE;">Quick</span><span style="color: #FF534F;">Headlines</span>
+        </h1>
         <ul>
             <li><a href="{% url 'home' %}">Home</a></li>
+            <span class="hr">|</span>
             <li><a href="{% url 'category_news' category='international' %}">International</a></li>
-            <li><a href="{% url 'category_news' category='sports' %}">Sports</a></li>
-            <li><a href="{% url 'category_news' category='entertainment' %}">Entertainment</a></li>
+            <span class="hr">|</span>
+            <li><a href="{% url 'category_news' category='science-technology' %}">Science</a></li>
+            <span class="hr">|</span>
             <li><a href="{% url 'category_news' category='business' %}">Business</a></li>
+            <span class="hr">|</span>
+            <li><a href="{% url 'category_news' category='sports' %}">Sports</a></li>
+            <span class="hr">|</span>
+            <li><a href="{% url 'category_news' category='middle-east-international' %}">Middle-East</a></li>
         </ul>
     </nav>
 
@@ -28,7 +37,7 @@
             <div class="news-item">
                 <h2>{{ item.title }}</h2>
                 <p class="news-meta">
-                    <span><strong>Type:</strong> {{ item.news_type }}</span> |
+                    <span><strong>Category:</strong> {{ item.category }}</span> |
                     <span><strong>Published:</strong> {{ item.published_date }}</span>
                 </p>
                 {% if item.image %}
