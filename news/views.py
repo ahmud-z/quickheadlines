@@ -2,7 +2,8 @@ import requests
 from django.shortcuts import render
 from datetime import datetime
 
-IMAGE_BASE_URL = "https://images.prothomalo.com/"  # Base URL for images
+IMAGE_BASE_URL = "https://images.assettype.com/"
+
 BASE_API_URL = (
     "https://en.prothomalo.com/api/v1/collections/{category}?offset=0&limit=200"
 )
