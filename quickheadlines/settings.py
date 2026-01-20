@@ -13,17 +13,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from pathlib import Path
 import os
 
-STATIC_URL = '/static/'
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-
-# Ensure STATIC_ROOT is set for `collectstatic`
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
-# Static files (CSS, JS, images)
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'news/static'),
-]
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 
@@ -37,6 +27,11 @@ SECRET_KEY = "django-insecure-3n1rl=t3f3vm9ftl4d(ubr)iv-^yy_kx%fjm$6!w-8=goi%jd_
 DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
+
+
+if not DEBUG:
+    STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+    STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 
 # Application definition
@@ -53,6 +48,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -127,13 +123,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = "static/"
+STATIC_URL = "/static/"
 # Ensure STATIC_ROOT is set for `collectstatic`
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 # Static files (CSS, JS, images)
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'news/static'),
+    os.path.join(BASE_DIR, "news/static"),
 ]
 
 # Default primary key field type
